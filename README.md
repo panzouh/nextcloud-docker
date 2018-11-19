@@ -17,6 +17,7 @@ server {
 
 #### Using domain name 
 > Add DNS host entry to your domain and change server_name
+
 server {
   listen 8000;
   server_name nextcloud.domain.tld;
