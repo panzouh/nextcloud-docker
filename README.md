@@ -16,7 +16,7 @@ server {
 }
 
 #### Using domain name 
-> Add DNS host entry to your domain and change server_name
+> Add DNS host entry to your domain and change server_name (use 'nextcloud-example.conf' it's easier)
 
 server {
   listen 8000;
@@ -34,3 +34,6 @@ server {
     include /conf.d/proxy-params.conf;
   }
 }
+
+#### Obtain a free certificate
+> Navigate to https://certbot.eff.org/lets-encrypt and follow instructions
