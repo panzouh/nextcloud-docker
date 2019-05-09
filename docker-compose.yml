@@ -1,22 +1,20 @@
-nginx:                                                                                                                                                                                                                                                                                                                      
-    image: wonderfall/boring-nginx                                                                                                                                                                                                                                                                                          
-    container_name: nginx                                                                                                                                                                                                                                                                                                   
-    restart: always                                                                                                                                                                                                                                                                                                         
-    links:                                                                                                                                                                                                                                                                                                                  
-      - nextcloud:nextcloud                                                                                                                                                                                                                                                                                                 
-    ports:                                                                                                                                                                                                                                                                                                                  
-      - "80:8000"                                                                                                                                                                                                                                                                                                           
-      - "443:4430"                                                                                                                                                                                                                                                                                                          
-    volumes:                                                                                                                                                                                                                                                                                                                
-      - /home/docker/nginx/sites-enabled:/sites-enabled                                                                                                                                                                                                                                                                     
-      - /home/docker/nginx/conf:/conf.d                                                                                                                                                                                                                                                                                     
-      - /home/docker/nginx/log:/var/log/nginx                                                                                                                                                                                                                                                                               
-      - /home/docker/nginx/certs:/certs                                                                                                                                                                                                                                                                                     
-      - /home/docker/nginx/passwd:/passwds                                                                                                                                                                                                                                                                                  
-      - /home/docker/nginx/www:/www                                                                                                                                                                                                                                                                                         
-      - /home/docker/letsencrypt/live:/letsencrypt                                                                                                                                                                                                                                                                          
-    environment:                                                                                                                                                                                                                                                                                                            
-      - UID=1000                                                                                                                                                                                                                                                                                                            
+version: '2'
+
+nginx:
+    image: bitnami/nginx
+    container_name: nginx
+    restart: always
+    links:
+      - nextcloud:nextcloud
+    ports:
+      - "80:8080"
+      - "443:8443"
+    volumes:
+      - /home/docker/cloud/nginx/sites-enabled/nextcloud.conf:/opt/bitnami/nginx/conf/vhosts/nextcloud.conf:ro
+      - /home/docker/cloud/nginx/certs:/bitnami/nginx/conf/bitnami/certs
+      - /home/docker/cloud/nginx/logs:/opt/bitnami/nginx/logs/
+    environment:
+      - UID=1000
       - GID=1000                                                                                                                                                                                                                                                                                                            
 nextcloud:                                                                                                                                                                                                                                                                                                                  
     image: wonderfall/nextcloud                                                                                                                                                                                                                                                                                             
